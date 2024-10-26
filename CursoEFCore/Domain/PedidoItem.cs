@@ -1,6 +1,6 @@
 namespace CursoEFCore.Domain
 {
-  class PedidoItem
+  public class PedidoItem
   {
     public int Id { get; set; }
     public int PedidoId { get; set; }

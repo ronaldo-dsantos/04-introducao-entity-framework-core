@@ -1,8 +1,9 @@
 using CursoEFCore.ValueObjects;
 
+
 namespace CursoEFCore.Domain
 {
-  class Pedido
+  public class Pedido
   {
     public int Id { get; set; }
     public int ClienteId { get; set; }
