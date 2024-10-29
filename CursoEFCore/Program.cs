@@ -21,7 +21,35 @@ class Program
     */
 
     //InserirDados();
-    InserirDadosEmMassa();
+    //InserirDadosEmMassa();
+    ConsultarDados();
+  }
+
+  public static void ConsultarDados()
+  {
+    using var db = new Data.ApplicationContext();
+
+    //var consultaPorSintaxe = (from c in db.Clientes where c.Id > 0 select c).ToList();
+    var consultaPorMetodo = db.Clientes
+    .Where(p => p.Id > 0)
+    .OrderBy(p => p.Id)
+    .ToList();
+
+    foreach (var cliente in consultaPorMetodo)
+    {
+      Console.WriteLine($"Consultado Cliente: {cliente.Id}");
+      db.Clientes.FirstOrDefault(p => p.Id == cliente.Id);   
+    }
+
+    /*
+    var consultaPorMetodo = db.Clientes.AsNoTracking().Where(p => p.Id > 0).ToList(); // AsNoTracking() para que o entity framework não rastreie esse resultado na memória, obrigando a buscar as informações no banco de dados, útil dependendo da regra de negócio 
+
+    foreach (var cliente in consultaPorMetodo)
+    {
+      Console.WriteLine($"Consultado Cliente: {cliente.Id}");
+      db.Clientes.Find(cliente.Id); // Find() vai realizar a consulta primeiramente na memória, se não encontrar, aí sim busca no banco de dados 
+    }
+    */
   }
 
   private static void InserirDadosEmMassa()
