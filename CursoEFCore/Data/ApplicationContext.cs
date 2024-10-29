@@ -6,7 +6,7 @@ namespace CursoEFCore.Data
 {
   public class ApplicationContext : DbContext
   {
-    //private static readonly ILoggerFactory _logger = LoggerFactory.Create(p => p.AddConsole);
+    private static readonly ILoggerFactory _logger = LoggerFactory.Create(p => p.AddConsole()); // Criando a instancia do log que iremos utilizar
 
     public DbSet<Pedido> Pedidos { get; set; }
     public DbSet<Produto> Produtos { get; set; }
@@ -15,8 +15,8 @@ namespace CursoEFCore.Data
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
       optionsBuilder
-          //.UseLoggerFactory(_logger)
-          .EnableSensitiveDataLogging()
+          .UseLoggerFactory(_logger) // Informando qual log iremos utilizar
+          .EnableSensitiveDataLogging() // habilitando o método de extensão para que possamos visualizar os dados sensiveis
           .UseSqlServer("Data source=(localdb)\\mssqllocaldb;Initial Catalog=CursoEFCore;Integrated Security=true",
            p => p.EnableRetryOnFailure(
                maxRetryCount: 2,
