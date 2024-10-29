@@ -22,7 +22,54 @@ class Program
 
     //InserirDados();
     //InserirDadosEmMassa();
-    ConsultarDados();
+    //ConsultarDados();
+    //CadastrarPedido();
+
+    ConsultarPedidoComCarregamentoAdiantado();
+  }
+
+  private static void ConsultarPedidoComCarregamentoAdiantado()
+  {
+    using var db = new Data.ApplicationContext(); // instanciando o banco de dados
+
+    var pedidos = db // consultando todos os pedidos existentes no banco de dados
+    .Pedidos
+    .Include(p=>p.Itens) // Include(p=>p.Itens) para utilizar o carregamento adiantado da tabela itens | Include para relacionamentos que estão no primeiro nível 
+      .ThenInclude(p=>p.Produto) // ThenInclude(p=>p.Produto) para utilizar o carregamento adiantado da tabela Produto | ThenInclude para relacionamentos que estão no primeiro nível, nesse caso é um relacionamento da tabela itens e não da tabela pedidos 
+    .ToList();  
+
+    Console.WriteLine(pedidos.Count()); // exibindo a quantidade de pedidos
+  }
+
+  private static void CadastrarPedido()
+  {
+    using var db = new Data.ApplicationContext(); // instanciando o banco de dados
+
+    var cliente = db.Clientes.FirstOrDefault(); // fazendo uma consulta do primeiro cliente no banco de dados
+    var produto = db.Produtos.FirstOrDefault(); // fazendo uma consulta do primeiro produto no banco de dados
+
+    var pedido = new Pedido // criando um pedido com os dados do cliente consultado no banco de dados
+    {
+      ClienteId = cliente.Id,
+      IniciadoEm = DateTime.Now,
+      FinalizadoEm = DateTime.Now,
+      Observacao = "Pedido Teste",
+      Status = StatusPedido.Analise,
+      TipoFrete = TipoFrete.SemFrete,
+      Itens = new List<PedidoItem>
+      {
+        new PedidoItem // criando um pedido item com os dados do produto consultado no banco de dados
+        {
+          ProdutoId = produto.Id,
+          Desconto = 0,
+          Quantidade = 1,
+          Valor = 10,
+        }
+      }
+    };
+
+    db.Pedidos.Add(pedido); // adicionando o pedido no banco de dados
+    db.SaveChanges(); // salvando as alterações no banco de dados
   }
 
   public static void ConsultarDados()
@@ -38,7 +85,7 @@ class Program
     foreach (var cliente in consultaPorMetodo)
     {
       Console.WriteLine($"Consultado Cliente: {cliente.Id}");
-      db.Clientes.FirstOrDefault(p => p.Id == cliente.Id);   
+      db.Clientes.FirstOrDefault(p => p.Id == cliente.Id);
     }
 
     /*

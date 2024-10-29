@@ -8,6 +8,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = CursoEFCore
-build_property.ProjectDir = C:\Users\ronal\OneDrive\Documentos\desenvolvedor.io\04-introducao-entity-framework-core\CursoEFCore\
+build_property.ProjectDir = c:\Users\ronal\OneDrive\Documentos\desenvolvedor.io\04-introducao-entity-framework-core\CursoEFCore\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
