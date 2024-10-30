@@ -15,13 +15,13 @@ namespace CursoEFCore.Data
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
       optionsBuilder
-          .UseLoggerFactory(_logger) // Informando qual log iremos utilizar
-          .EnableSensitiveDataLogging() // habilitando o método de extensão para que possamos visualizar os dados sensiveis
-          .UseSqlServer("Data source=(localdb)\\mssqllocaldb;Initial Catalog=CursoEFCore;Integrated Security=true",
-           p => p.EnableRetryOnFailure(
-               maxRetryCount: 2,
-               maxRetryDelay: TimeSpan.FromSeconds(5),
-               errorNumbersToAdd: null).MigrationsHistoryTable("curso_ef_core"));
+        .UseLoggerFactory(_logger) // Informando qual log iremos utilizar
+        .EnableSensitiveDataLogging() // habilitando o método de extensão para que possamos visualizar os dados sensiveis
+        .UseSqlServer("Data source=(localdb)\\mssqllocaldb;Initial Catalog=CursoEFCore;Integrated Security=true",
+          p => p.EnableRetryOnFailure( // habilitando o método Retry para os casos de falha de conexão, por padrão em caso de falhas ele tenta se conectar por 6 vezes em um minuto, mas podemos alterar esse padrão
+            maxRetryCount: 2, // alterando o número de tentativas para 2
+            maxRetryDelay: TimeSpan.FromSeconds(5), // alterando o tempo de delay entre uma tentativa e outra para 5 segundos
+            errorNumbersToAdd: null).MigrationsHistoryTable("curso_ef_core")); // podemos informar errorNumbersToAdd quais os códigos dos erros adicionas que desejamos que seja interpredado, nesse caso usamos o null para nenhum adicional e manter o padrão
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
