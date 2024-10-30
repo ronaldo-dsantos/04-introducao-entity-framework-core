@@ -24,8 +24,44 @@ class Program
     //InserirDadosEmMassa();
     //ConsultarDados();
     //CadastrarPedido();
+    //ConsultarPedidoComCarregamentoAdiantado();
 
-    ConsultarPedidoComCarregamentoAdiantado();
+    AtualizarDados();
+  }
+
+  private static void AtualizarDados(){
+    /*
+    using var db = new Data.ApplicationContext(); // instanciando do banco de dados
+    var cliente = db.Clientes.FirstOrDefault(p => p.Id == 1); // buscando na tabela clientes o cliente com o id = 1
+
+    cliente.Nome = "Nome Alterado Passo 2"; // alterando o objeto cliente
+
+    //db.Clientes.Update(cliente); // enviando a alteração para o banco de dados | se utilizarmos essa linha de código com o update, ele vai atualizar todos os dados de um cliente, com isso, podemos usar apenas o SaveChanges() para atualizar no bd somente o dado que realmente foi alterado
+    //db.Entry(cliente).State = EntityState.Modified; // essa é uma segunda opção de informar de maneira explicita para o entity framework alterar apenas o estado que foi modificado
+    db.SaveChanges(); // salvando as alterações no banco de dados
+    */
+
+    // Cenário Desconectado (cenário que o dados não foram instanciados ainda, exemplo um frontend que manda os dados para que uma api possa tratá-los e acessar o bd)
+    using var db = new Data.ApplicationContext();
+    
+    //var cliente = db.Clientes.Find(1); // uma das maneiras de trabalhar com o cliente desconectado é consultando ele no banco de dados
+
+    var cliente = new Cliente // outra maneira é informar explicitamente o cliente que vamos fazer a alteração e usar o attach para começar a rastrear esse objeto
+    {
+      Id = 1
+    };
+
+    db.Attach(cliente); // Attach atachar o objeto para que ele comece a ser rastreado internamente
+    
+    var clienteDesconetado = new // criando um objeto anonimo 
+    {
+      Nome = "Cliente Desconectado 03",
+      Telefone = "99980726843"
+    };
+    
+    db.Entry(cliente).CurrentValues.SetValues(clienteDesconetado);
+
+    db.SaveChanges();
   }
 
   private static void ConsultarPedidoComCarregamentoAdiantado()
@@ -34,9 +70,9 @@ class Program
 
     var pedidos = db // consultando todos os pedidos existentes no banco de dados
     .Pedidos
-    .Include(p=>p.Itens) // Include(p=>p.Itens) para utilizar o carregamento adiantado da tabela itens | Include para relacionamentos que estão no primeiro nível 
-      .ThenInclude(p=>p.Produto) // ThenInclude(p=>p.Produto) para utilizar o carregamento adiantado da tabela Produto | ThenInclude para relacionamentos que estão no primeiro nível, nesse caso é um relacionamento da tabela itens e não da tabela pedidos 
-    .ToList();  
+    .Include(p => p.Itens) // Include(p=>p.Itens) para utilizar o carregamento adiantado da tabela itens | Include para relacionamentos que estão no primeiro nível 
+      .ThenInclude(p => p.Produto) // ThenInclude(p=>p.Produto) para utilizar o carregamento adiantado da tabela Produto | ThenInclude para relacionamentos que estão no primeiro nível, nesse caso é um relacionamento da tabela itens e não da tabela pedidos 
+    .ToList();
 
     Console.WriteLine(pedidos.Count()); // exibindo a quantidade de pedidos
   }
@@ -72,7 +108,7 @@ class Program
     db.SaveChanges(); // salvando as alterações no banco de dados
   }
 
-  public static void ConsultarDados()
+  private static void ConsultarDados()
   {
     using var db = new Data.ApplicationContext();
 

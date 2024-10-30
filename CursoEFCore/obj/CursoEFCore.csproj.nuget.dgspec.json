@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\ronal\\OneDrive\\Documentos\\desenvolvedor.io\\04-introducao-entity-framework-core\\CursoEFCore\\CursoEFCore.csproj": {}
+    "C:\\Users\\ronal\\OneDrive\\Documentos\\desenvolvedor.io\\04-introducao-entity-framework-core\\CursoEFCore\\CursoEFCore.csproj": {}
   },
   "projects": {
-    "c:\\Users\\ronal\\OneDrive\\Documentos\\desenvolvedor.io\\04-introducao-entity-framework-core\\CursoEFCore\\CursoEFCore.csproj": {
+    "C:\\Users\\ronal\\OneDrive\\Documentos\\desenvolvedor.io\\04-introducao-entity-framework-core\\CursoEFCore\\CursoEFCore.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\ronal\\OneDrive\\Documentos\\desenvolvedor.io\\04-introducao-entity-framework-core\\CursoEFCore\\CursoEFCore.csproj",
+        "projectUniqueName": "C:\\Users\\ronal\\OneDrive\\Documentos\\desenvolvedor.io\\04-introducao-entity-framework-core\\CursoEFCore\\CursoEFCore.csproj",
         "projectName": "CursoEFCore",
-        "projectPath": "c:\\Users\\ronal\\OneDrive\\Documentos\\desenvolvedor.io\\04-introducao-entity-framework-core\\CursoEFCore\\CursoEFCore.csproj",
+        "projectPath": "C:\\Users\\ronal\\OneDrive\\Documentos\\desenvolvedor.io\\04-introducao-entity-framework-core\\CursoEFCore\\CursoEFCore.csproj",
         "packagesPath": "C:\\Users\\ronal\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\ronal\\OneDrive\\Documentos\\desenvolvedor.io\\04-introducao-entity-framework-core\\CursoEFCore\\obj\\",
+        "outputPath": "C:\\Users\\ronal\\OneDrive\\Documentos\\desenvolvedor.io\\04-introducao-entity-framework-core\\CursoEFCore\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ronal\\AppData\\Roaming\\NuGet\\NuGet.Config",

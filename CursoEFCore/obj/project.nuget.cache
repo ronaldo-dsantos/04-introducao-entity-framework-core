@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "x1YKWQ7FogU=",
+  "dgSpecHash": "pzpL/bIQXN4=",
   "success": true,
-  "projectFilePath": "c:\\Users\\ronal\\OneDrive\\Documentos\\desenvolvedor.io\\04-introducao-entity-framework-core\\CursoEFCore\\CursoEFCore.csproj",
+  "projectFilePath": "C:\\Users\\ronal\\OneDrive\\Documentos\\desenvolvedor.io\\04-introducao-entity-framework-core\\CursoEFCore\\CursoEFCore.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ronal\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\ronal\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",
