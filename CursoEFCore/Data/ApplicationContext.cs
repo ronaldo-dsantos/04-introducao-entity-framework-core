@@ -27,22 +27,23 @@ namespace CursoEFCore.Data
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
       modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationContext).Assembly);
-      MapearPropriedadesEsquecidas(modelBuilder);
+      MapearPropriedadesEsquecidas(modelBuilder); // chamando o métodos de propriedades esquecidas
     }
 
-    private void MapearPropriedadesEsquecidas(ModelBuilder modelBuilder)
+    // Detectando propridades não configuradas (método para que possamos configurar propriedades que eventualmente podemos esquecido de configurar em nossa aplicação, neste exemplo vamos verificar as do tipo string)
+    private void MapearPropriedadesEsquecidas(ModelBuilder modelBuilder) // criando o método e recebendo a propridade modelbuilder por parametro
     {
-      foreach (var entity in modelBuilder.Model.GetEntityTypes())
+      foreach (var entity in modelBuilder.Model.GetEntityTypes()) // percorrendo a lista das entidades configuradas em nossa aplicação
       {
-        var properties = entity.GetProperties().Where(p => p.ClrType == typeof(string));
+        var properties = entity.GetProperties().Where(p => p.ClrType == typeof(string)); // carregando todas as propriedades dessa entidade que sejam do tipo string, mas podemos alterar a estratégia para outros tipos também
 
-        foreach (var property in properties)
+        foreach (var property in properties) // percorrendo a lista de propriedades
         {
-          if (string.IsNullOrEmpty(property.GetColumnType())
-              && !property.GetMaxLength().HasValue)
+          if (string.IsNullOrEmpty(property.GetColumnType()) // verificando se o tipo da coluna está vazio
+              && !property.GetMaxLength().HasValue) // veriticando se o tamanho da propriedade foi informado
           {
-            //property.SetMaxLength(100);
-            property.SetColumnType("VARCHAR(100)");
+            //property.SetMaxLength(100); // informando o tamanho para o campo desejado
+            property.SetColumnType("VARCHAR(100)"); // informando o tipo e tamanho para o campo desejado
           }
         }
       }
