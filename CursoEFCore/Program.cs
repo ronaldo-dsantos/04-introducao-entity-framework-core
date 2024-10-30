@@ -25,12 +25,37 @@ class Program
     //ConsultarDados();
     //CadastrarPedido();
     //ConsultarPedidoComCarregamentoAdiantado();
-
-    AtualizarDados();
+    //AtualizarDados();
+    RemoverRegistro();
   }
 
-  private static void AtualizarDados(){
+  private static void RemoverRegistro()
+  {
+    
+    using var db = new Data.ApplicationContext(); // instanciando o banco de dados
+
+    var cliente = db.Clientes.Find(2); // localizando o cliente que vamos remover em nosso banco de dados | Find() busca por padrão a chave primária, por isso não precisamos informar qual campo estamos pesquisando 
+
+    db.Clientes.Remove(cliente); // uma das maneiras de se remover um cliente do banco de dados
+    db.Remove(cliente); // outra maneira de se remover um cliente do banco de dados, usando a instancia que já consta no objeto cliente
+    db.Entry(cliente).State = EntityState.Deleted; // outra maneira de se remover um cliente do banco de dados, alterando o estado do objeto para deleted
+
+    db.SaveChanges(); // salvando as alterações em nosso banco de dados
+    
     /*
+    // Cenário Desconectado (cenário que o dados não foram instanciados ainda, exemplo um frontend que manda os dados para que uma api possa tratá-los e acessar o bd)
+    using var db = new Data.ApplicationContext(); // instanciando o banco de dados
+
+    var cliente = new Cliente { Id = 3 }; // informando de forma explicita qual cliente iremos remover
+
+    db.Entry(cliente).State = EntityState.Deleted; // alterando o estado do objeto para deleted
+
+    db.SaveChanges(); // salvando as alteração no banco de dados
+    */
+  }
+
+  private static void AtualizarDados()
+  {
     using var db = new Data.ApplicationContext(); // instanciando do banco de dados
     var cliente = db.Clientes.FirstOrDefault(p => p.Id == 1); // buscando na tabela clientes o cliente com o id = 1
 
@@ -39,29 +64,30 @@ class Program
     //db.Clientes.Update(cliente); // enviando a alteração para o banco de dados | se utilizarmos essa linha de código com o update, ele vai atualizar todos os dados de um cliente, com isso, podemos usar apenas o SaveChanges() para atualizar no bd somente o dado que realmente foi alterado
     //db.Entry(cliente).State = EntityState.Modified; // essa é uma segunda opção de informar de maneira explicita para o entity framework alterar apenas o estado que foi modificado
     db.SaveChanges(); // salvando as alterações no banco de dados
+
+    /*
+      // Cenário Desconectado (cenário que o dados não foram instanciados ainda, exemplo um frontend que manda os dados para que uma api possa tratá-los e acessar o bd)
+      using var db = new Data.ApplicationContext();
+      
+      //var cliente = db.Clientes.Find(1); // uma das maneiras de trabalhar com o cliente desconectado é consultando ele no banco de dados
+
+      var cliente = new Cliente // outra maneira é informar explicitamente o cliente que vamos fazer a alteração e usar o attach para começar a rastrear esse objeto
+      {
+        Id = 1
+      };
+
+      db.Attach(cliente); // Attach atachar o objeto para que ele comece a ser rastreado internamente
+      
+      var clienteDesconetado = new // criando um objeto anonimo 
+      {
+        Nome = "Cliente Desconectado 03",
+        Telefone = "99980726843"
+      };
+      
+      db.Entry(cliente).CurrentValues.SetValues(clienteDesconetado);
+
+      db.SaveChanges();
     */
-
-    // Cenário Desconectado (cenário que o dados não foram instanciados ainda, exemplo um frontend que manda os dados para que uma api possa tratá-los e acessar o bd)
-    using var db = new Data.ApplicationContext();
-    
-    //var cliente = db.Clientes.Find(1); // uma das maneiras de trabalhar com o cliente desconectado é consultando ele no banco de dados
-
-    var cliente = new Cliente // outra maneira é informar explicitamente o cliente que vamos fazer a alteração e usar o attach para começar a rastrear esse objeto
-    {
-      Id = 1
-    };
-
-    db.Attach(cliente); // Attach atachar o objeto para que ele comece a ser rastreado internamente
-    
-    var clienteDesconetado = new // criando um objeto anonimo 
-    {
-      Nome = "Cliente Desconectado 03",
-      Telefone = "99980726843"
-    };
-    
-    db.Entry(cliente).CurrentValues.SetValues(clienteDesconetado);
-
-    db.SaveChanges();
   }
 
   private static void ConsultarPedidoComCarregamentoAdiantado()
