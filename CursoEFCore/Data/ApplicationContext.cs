@@ -21,7 +21,8 @@ namespace CursoEFCore.Data
           p => p.EnableRetryOnFailure( // habilitando o método Retry para os casos de falha de conexão, por padrão em caso de falhas ele tenta se conectar por 6 vezes em um minuto, mas podemos alterar esse padrão
             maxRetryCount: 2, // alterando o número de tentativas para 2
             maxRetryDelay: TimeSpan.FromSeconds(5), // alterando o tempo de delay entre uma tentativa e outra para 5 segundos
-            errorNumbersToAdd: null).MigrationsHistoryTable("curso_ef_core")); // podemos informar errorNumbersToAdd quais os códigos dos erros adicionas que desejamos que seja interpredado, nesse caso usamos o null para nenhum adicional e manter o padrão
+            errorNumbersToAdd: null) // podemos informar errorNumbersToAdd quais os códigos dos erros adicionas que desejamos que seja interpredado, nesse caso usamos o null para nenhum adicional e manter o padrão
+            .MigrationsHistoryTable("curso_ef_core")); // alterando o nome padrão da tabela de historico de migrações
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
