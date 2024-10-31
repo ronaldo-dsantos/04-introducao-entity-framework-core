@@ -10,14 +10,14 @@ namespace CursoEFCore.Data.Configurations
     {
       builder.ToTable("Pedidos");
       builder.HasKey(p => p.Id);
-      builder.Property(p => p.IniciadoEm).HasDefaultValueSql("GETDATE()").ValueGeneratedOnAdd();
+      builder.Property(p => p.IniciadoEm).HasDefaultValueSql("GETDATE()").ValueGeneratedOnAdd(); // HasDefaultValueSql informando de maneira explicita um comando SQL que desejamos executar
       builder.Property(p => p.Status).HasConversion<string>();
       builder.Property(p => p.TipoFrete).HasConversion<int>();
       builder.Property(p => p.Observacao).HasColumnType("VARCHAR(512)");
 
-      builder.HasMany(p => p.Itens)
-          .WithOne(p => p.Pedido)
-          .OnDelete(DeleteBehavior.Cascade);
+      builder.HasMany(p => p.Itens) // relacionamento muitos para um
+        .WithOne(p => p.Pedido)
+        .OnDelete(DeleteBehavior.Cascade); // deletar em cascata
     }
   }
 }

@@ -10,7 +10,7 @@ namespace CursoEFCore.Data.Configurations
     {
       builder.ToTable("PedidoItens");
       builder.HasKey(p => p.Id);
-      builder.Property(p => p.Quantidade).HasDefaultValue(0).IsRequired();
+      builder.Property(p => p.Quantidade).HasDefaultValue(0).IsRequired(); // HasDefaultValue valor default quando não for informando
       builder.Property(p => p.Valor).HasDefaultValue(0).IsRequired();
       builder.Property(p => p.Desconto).HasDefaultValue(0).IsRequired();
     }

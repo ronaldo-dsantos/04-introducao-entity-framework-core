@@ -13,7 +13,7 @@ namespace CursoEFCore.Data.Configurations
       builder.Property(p => p.CodigoBarras).HasColumnType("VARCHAR(14)").IsRequired();
       builder.Property(p => p.Descricao).HasColumnType("VARCHAR(60)");
       builder.Property(p => p.Valor).IsRequired();
-      builder.Property(p => p.TipoProduto).HasConversion<string>();
+      builder.Property(p => p.TipoProduto).HasConversion<string>(); // HasConversion por se tratar de um enum podemos definir se queremos armazenar como string ou inteiro
     }
   }
 }
