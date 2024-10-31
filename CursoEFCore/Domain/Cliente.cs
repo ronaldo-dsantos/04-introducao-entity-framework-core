@@ -9,4 +9,4 @@ namespace CursoEFCore.Domain
     public string Estado { get; set; }
     public string Cidade { get; set; }
   }
-}
+} 
