@@ -1,6 +1,6 @@
 namespace CursoEFCore.ValueObjects
 {
-  public enum StatusPedido
+  public enum StatusPedido // Criando o Enum StatusPedido
   {
     Analise,
     Finalizado,

@@ -1,6 +1,6 @@
 namespace CursoEFCore.ValueObjects
 {
-  public enum TipoFrete
+  public enum TipoFrete // Criando o Enum TipoFrete
   {
     CIF,
     FOB,
