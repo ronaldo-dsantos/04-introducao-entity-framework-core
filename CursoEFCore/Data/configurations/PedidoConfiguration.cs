@@ -12,7 +12,7 @@ namespace CursoEFCore.Data.Configurations
       builder.HasKey(p => p.Id);
       builder.Property(p => p.IniciadoEm).HasDefaultValueSql("GETDATE()").ValueGeneratedOnAdd(); // HasDefaultValueSql informando de maneira explicita um comando SQL que desejamos executar
       builder.Property(p => p.Status).HasConversion<string>();
-      builder.Property(p => p.TipoFrete).HasConversion<int>();
+      builder.Property(p => p.TipoFrete).HasConversion<int>(); // HasConversion por se tratar de um enum podemos definir se queremos armazenar como string (nome do enum) ou inteiro (valor correspondente do enum)
       builder.Property(p => p.Observacao).HasColumnType("VARCHAR(512)");
 
       builder.HasMany(p => p.Itens) // relacionamento muitos para um
