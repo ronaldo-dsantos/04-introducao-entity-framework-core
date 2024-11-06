@@ -9,7 +9,7 @@ class Program
   static void Main(string[] args)
   {
     using var db = new Data.ApplicationContext();
-    //db.Database.Migrate();
+    //db.Database.Migrate(); // Esta é uma das maneiras de aplicar as migrações ao BD (não indicada para ambiente de produção, caso tenha outras aplicação utilizando seu BD pode gerar conflitos), outra maneira é via prompt de comando
 
     /*
     var migracaoPendente = db.Database.GetPendingMigrations().Any(); // GetPendingMigrations() para verificar se há migrações pendentes | Any() para transformar em booleano 

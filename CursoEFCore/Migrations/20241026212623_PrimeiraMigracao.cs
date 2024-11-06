@@ -9,8 +9,10 @@ namespace CursoEFCore.Migrations
   public partial class PrimeiraMigracao : Migration
   {
     /// <inheritdoc />
-    protected override void Up(MigrationBuilder migrationBuilder)
+    protected override void Up(MigrationBuilder migrationBuilder) 
     {
+      //migrationBuilder.Sql("CREATE FUNCTION ..."); // Caso queira criar alguma função em seu banco de dados, ela deve ser criada aqui para ser executada junto com a migration
+
       migrationBuilder.CreateTable(
           name: "Clientes",
           columns: table => new
@@ -122,6 +124,8 @@ namespace CursoEFCore.Migrations
     /// <inheritdoc />
     protected override void Down(MigrationBuilder migrationBuilder)
     {
+      //migrationBuilder.Sql("DROP FUNCTION ..."); // se criarmos a função no método up, precisamos inserir o drop dela no método down, para os casos de reverter a migration
+
       migrationBuilder.DropTable(
           name: "PedidoItens");
 

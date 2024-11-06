@@ -1,4 +1,8 @@
-﻿IF OBJECT_ID(N'[curso_ef_core]') IS NULL
+﻿/* Gerando um script de migração SQL */
+/* Podemos gerar este script via prompt de comando para solicitar ao DBA a execução no BD nos casos que não teremos acesso*/
+/* Basicamente este script é a conversão da nossa migration para códigos SQL*/
+
+IF OBJECT_ID(N'[curso_ef_core]') IS NULL
 BEGIN
     CREATE TABLE [curso_ef_core] (
         [MigrationId] nvarchar(150) NOT NULL,
