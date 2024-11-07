@@ -1,4 +1,10 @@
-﻿IF OBJECT_ID(N'[curso_ef_core]') IS NULL
+﻿/* 
+  Gerando Scripts SQL Idempotentes
+  São scripts de mmigração gerado via prompt de comando com validações, para que seja aplicado ao banco de dados somente o que foi de fato alterado
+  Exemplo: Verifica se a tabela já existe no bd, se sim, ele não vai executar o comando para gerar essa tabela já existente
+*/
+
+IF OBJECT_ID(N'[curso_ef_core]') IS NULL
 BEGIN
     CREATE TABLE [curso_ef_core] (
         [MigrationId] nvarchar(150) NOT NULL,
