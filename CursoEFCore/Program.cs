@@ -36,9 +36,9 @@ class Program
 
     var cliente = db.Clientes.Find(2); // localizando o cliente que vamos remover em nosso banco de dados | Find() busca por padrão a chave primária, por isso não precisamos informar qual campo estamos pesquisando 
 
-    db.Clientes.Remove(cliente); // uma das maneiras de se remover um cliente do banco de dados
+    //db.Clientes.Remove(cliente); // uma das maneiras de se remover um cliente do banco de dados
     db.Remove(cliente); // outra maneira de se remover um cliente do banco de dados, usando a instancia que já consta no objeto cliente
-    db.Entry(cliente).State = EntityState.Deleted; // outra maneira de se remover um cliente do banco de dados, alterando o estado do objeto para deleted
+    //db.Entry(cliente).State = EntityState.Deleted; // outra maneira de se remover um cliente do banco de dados, alterando o estado do objeto para deleted
 
     db.SaveChanges(); // salvando as alterações em nosso banco de dados
     
@@ -92,6 +92,7 @@ class Program
 
   private static void ConsultarPedidoComCarregamentoAdiantado()
   {
+    // Carregamento adiantado significa que os dados relacionados (relacionamento) serão carregados do banco de dados em uma única consulta
     using var db = new Data.ApplicationContext(); // instanciando o banco de dados
 
     var pedidos = db // consultando todos os pedidos existentes no banco de dados
@@ -147,7 +148,8 @@ class Program
     foreach (var cliente in consultaPorMetodo)
     {
       Console.WriteLine($"Consultado Cliente: {cliente.Id}");
-      db.Clientes.FirstOrDefault(p => p.Id == cliente.Id);
+      db.Clientes.Find(cliente.Id); // Find() vai realizar a consulta primeiramente na memória, como a busca já foi realizada acima, ele não precisa ir no bd para percorrer cada instância, útil por questões de performance dependendo da regra de negócio
+      //db.Clientes.FirstOrDefault(p => p.Id == cliente.Id); // FirstOrDefault() vai realizar a consulta diretamente no banco de dados, ao contrário do Find()
     }
 
     /*
@@ -187,7 +189,7 @@ class Program
     var registros = db.SaveChanges();
     Console.WriteLine($"Total Registro(s): {registros}");
 
-    // Outra maneira de inserir dados em massa usando uma lista
+    // Outra maneira de inserir dados em massa é utilizando uma lista
     /*
     var listaClientes = new[]
     {
@@ -221,6 +223,7 @@ class Program
 
   private static void InserirDados()
   {
+    // Intanciando um produto e atribuindo valores
     var produto = new Produto
     {
       Descricao = "Produto Teste",

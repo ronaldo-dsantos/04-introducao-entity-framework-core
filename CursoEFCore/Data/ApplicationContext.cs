@@ -10,7 +10,7 @@ namespace CursoEFCore.Data
 
     // O mapeamento de nossas propriedades para a criação em nossa base de dados podem ser realizado de duas maneiras, a primeira e conforme o exemplo abaixo 
     public DbSet<Pedido> Pedidos { get; set; } // expondo explicitamente a propriedade através da propriedade genérica DbSet, todos os tipos expostos através da propriedade DbSet garante que serão criados em nossa base de dados, assim como seus relacionamentos
-    public DbSet<Produto> Produtos { get; set; }
+    public DbSet<Produto> Produtos { get; set; } // expondo explicitamente a propriedade através da propriedade genérica DbSet, também para podermos utilizá-la através da instância ApplicationContext para manipulação de dados (ex: add)
     public DbSet<Cliente> Clientes { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) // sobrescrevendo o método OnConfiguring que é o método responsável pela nossa conexão
