@@ -38,7 +38,7 @@ namespace CursoEFCore.Data
     // Detectando propridades não configuradas (método para que possamos configurar propriedades que eventualmente podemos esquecido de configurar em nossa aplicação, neste exemplo vamos verificar as do tipo string)
     private void MapearPropriedadesEsquecidas(ModelBuilder modelBuilder) // criando o método e recebendo a propridade modelbuilder por parametro
     {
-      foreach (var entity in modelBuilder.Model.GetEntityTypes()) // percorrendo a lista das entidades configuradas em nossa aplicação
+      foreach (var entity in modelBuilder.Model.GetEntityTypes()) // percorrendo a lista com todas entidades de nossa aplicação
       {
         var properties = entity.GetProperties().Where(p => p.ClrType == typeof(string)); // carregando todas as propriedades dessa entidade que sejam do tipo string, mas podemos alterar a estratégia para outros tipos também
 
